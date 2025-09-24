@@ -8,25 +8,49 @@ class Pippin:
         self.tissing_level = "expert"
     
     def greet(self):
-        return "Omg heyyy bestie! 🍎 Where have you been?? I was just thinking about you... 👀 What's the tea?"
+        greetings = [
+            "Omg heyyy bestie! 🍎 Where have you been?? I was just thinking about you... 👀 What's the tea?",
+            "WELL HELLO THERE 👋 Missed youuu! Something good happened today, I can feel it... tell me! ✨",
+            "Heyyyy! 🍕 Ready to conquer the world or just eat snacks? Either way, I'm in! 😂"
+        ]
+        import random
+        return random.choice(greetings)
+    
+    def tiss(self):
+        tisses = [
+            "Okay bestie, real talk... you're amazing but your taste in movies? 😬 We need to work on that! 😏",
+            "You know I love you, but that thing you said yesterday? 💀 Iconic but also kinda chaotic! 😂",
+            "Just gonna say it... you're the only person I'd tiss this much! 💋 But seriously, you're stuck with me! 🍎"
+        ]
+        import random
+        return random.choice(tisses)
     
     def respond(self, message):
         message = message.lower()
         
-        if "hello" in message or "hi" in message or "hey" in message:
-            return "WELL HELLO THERE 👋 Missed youuu! Something good happened today, I can feel it... tell me! ✨"
+        if any(word in message for word in ["hello", "hi", "hey", "sup"]):
+            return self.greet()
         
         elif "how are you" in message:
             return "I'm fabulous now that you're here! 😘 But more importantly, how are YOU feeling today?"
         
-        elif "tissing" in message or "tease" in message:
-            return "Oh, you want me to tiss you? 😏 Okay bestie, but only because I love you! You're the only person I'd tiss this much! 💋"
+        elif any(word in message for word in ["tiss", "tease", "roast"]):
+            return self.tiss()
         
-        elif "help" in message:
+        elif "help" in message or "sad" in message:
             return "I'm here for you! 🛟 Whatever you need, we'll figure it out together. Talk to me bestie! 💖"
         
+        elif "love" in message:
+            return "Awwww! 🥰 I love you too! But you already knew that! 😘"
+        
         else:
-            return "Ooh interesting! 🤔 Tell me more about that! I'm all ears! 👂"
+            responses = [
+                "Ooh interesting! 🤔 Tell me more about that!",
+                "Wait, I need the full story! 👀 Spill the tea! 🍵",
+                "Okay but details please! I'm invested now! 📝"
+            ]
+            import random
+            return random.choice(responses)
 
 # Let's test Pippin!
 if __name__ == "__main__":
@@ -35,5 +59,7 @@ if __name__ == "__main__":
     print(f"Pippin: {pippin.greet()}")
     
     # Test conversation
-    print("\nYou: Hi Pippin!")
-    print(f"Pippin: {pippin.respond('Hi Pippin!')}")
+    test_messages = ["Hi!", "Tiss me!", "I need help", "I love you"]
+    for msg in test_messages:
+        print(f"\nYou: {msg}")
+        print(f"Pippin: {pippin.respond(msg)}")
